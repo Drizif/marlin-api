@@ -9,14 +9,24 @@ class PostValidator {
       state: Joi.string().required(),
       city: Joi.string().required(),
       beachName: Joi.string().optional(),
-    }).options({ allowUnknown: true, stripUnknown: true });
-  }
+      imgFile: Joi.object().keys({
+        name: Joi.string().required(),
+        data: Joi.binary().required(),
+        size: Joi.number().required(),
+        encoding: Joi.string().required(),
+        tempFilePath: Joi.string().optional().allow(''),
+        truncated: Joi.boolean().required(),
+        mimetype: Joi.string().required().valid('image/jpeg', 'image/png'),
+        md5: Joi.string().required(),
+      })
+  }).options({ allowUnknown: true, stripUnknown: true });
+}
 
-  getPost = () => {
-    return Joi.object().keys({
-      id: Joi.number().optional(),
-    }).options({ allowUnknown: true, stripUnknown: true });
-  }
+getPost = () => {
+  return Joi.object().keys({
+    id: Joi.number().optional(),
+  }).options({ allowUnknown: true, stripUnknown: true });
+}
 }
 
 module.exports = new PostValidator();

@@ -1,9 +1,9 @@
-
+const fileType = require('file-type');
 
 class PostController {
   createPost = async (req, res) => {
     try {
-      const { name, title, description, state, city, beachName } = req.post;
+      const { name, title, description, state, city, beachName, imgFile } = req.post;
 
       res.status(200).json({
         status: true,

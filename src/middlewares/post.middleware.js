@@ -3,7 +3,10 @@ const PostValidator = require('../validators/post.validator');
 class PostMiddleware {
   createPost = async (req, res, next) => {
     try {
-      req.post = await PostValidator.createPost().validateAsync({ ...req.body });
+      req.post = await PostValidator.createPost().validateAsync({ 
+        ...req.body,
+        ...req.files
+      });
 
       next();
     } catch (error) {

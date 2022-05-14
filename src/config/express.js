@@ -1,23 +1,29 @@
 const cors = require('cors');
 const helmet = require('helmet');
+const morgan = require('morgan');
 const express = require('express');
-const useragent = require('express-useragent');
+const fileUpload = require('express-fileupload');
 
 const routes = require('../router/index.routes');
 
-const { limit, cors_allowed } = require('./vars').server;
+const { limit, cors_allowed, debug, fileSize, tempFileDir, safeFileNames, preserveExtension } = require('./vars').server;
 
-const corsOptions = {
-  origin: cors_allowed,
-  optionsSuccessStatus: 200
-}
+const uploadConfig = {
+  tempFileDir,
+  safeFileNames,
+  preserveExtension,
+  limits: {
+    fileSize
+  }
+};
 
 const app = express();
-app.use(useragent.express());
 app.use(express.json({ limit }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit, extended: true }));
+if (debug === 'true') app.use(morgan('common'));
 app.use(helmet());
-app.use(cors(corsOptions));
+app.use(cors({ origin: cors_allowed }));
+app.use(fileUpload(uploadConfig));
 app.use('/api', routes);
 
 module.exports = app;
