@@ -9,6 +9,7 @@ class PostValidator {
       state: Joi.string().required(),
       city: Joi.string().required(),
       beachName: Joi.string().optional(),
+      contaminationLevel: Joi.string().required(),
       imgFile: Joi.object().keys({
         name: Joi.string().required(),
         data: Joi.binary().required(),

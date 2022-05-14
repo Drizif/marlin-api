@@ -4,7 +4,7 @@ const azureStorageService = require('../services/azureStorage.service');
 class PostController {
   createPost = async (req, res) => {
     try {
-      const { name, title, description, state, city, beachName, imgFile } = req.post;
+      const { name, title, description, state, city, contaminationLevel, beachName, imgFile } = req.post;
 
       await azureStorageService.uploadFile(imgFile.data, imgFile.mimetype);
 
