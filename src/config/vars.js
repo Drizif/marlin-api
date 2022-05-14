@@ -19,5 +19,10 @@ module.exports = {
     user: process.env.DBUSER,
     password: process.env.DBPASS,
     database: process.env.DBNAME,
+  },
+  azure: {
+    storageCStr: process.env.AZURE_STORAGE_CONNECTION_STRING,
+    storageAccount: process.env.AZURE_STORAGE_ACCOUNT,
+    containerName: process.env.AZURE_CONTAINER_NAME,
   }
 };
