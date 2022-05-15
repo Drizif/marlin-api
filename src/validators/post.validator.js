@@ -4,7 +4,7 @@ class PostValidator {
   createPost = () => {
     return Joi.object().keys({
       name: Joi.string().optional().default('Anonymous'),
-      title: Joi.string().required(),
+      title: Joi.string().optional(),
       description: Joi.string().required().max(250),
       state: Joi.string().required(),
       city: Joi.string().required(),
