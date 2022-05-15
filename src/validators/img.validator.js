@@ -12,7 +12,7 @@ class ImgValidator {
         truncated: Joi.boolean().required(),
         mimetype: Joi.string().required().valid('image/jpeg', 'image/png'),
         md5: Joi.string().required(),
-      })
+      }).required()
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 
