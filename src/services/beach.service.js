@@ -1,4 +1,5 @@
 const dbService = require('../services/db.service');
+const camelCaseUtil = require('../utils/camelCase.util');
 
 class BeachService {
   getBeachStatistics = async () => {
@@ -20,7 +21,7 @@ class BeachService {
         const iState = idxState[iCity.id_state];
         const iBeachStatistics = idxBeachStatistics[e.id_beach_statistics];
 
-        return {
+        return camelCaseUtil({
           id_beach: e.id_beach,
           beach_name: e.beach_name,
           state: iState.state_name,
@@ -29,7 +30,7 @@ class BeachService {
             ...iBeachStatistics,
             id_beach_statistics: undefined
           }
-        }
+        });
       });
 
       return data;
@@ -40,7 +41,10 @@ class BeachService {
 
   getBeach = async (id) => {
     try {
-      return id ? await dbService.rawQuery(`SELECT * FROM beach WHERE id_beach = ${id}`) : await dbService.rawQuery('SELECT * FROM beach');
+      return (id ? await dbService.rawQuery(`SELECT * FROM beach WHERE id_beach = ${id}`) : await dbService.rawQuery('SELECT * FROM beach')).map(e => {
+        return camelCaseUtil(e);
+      });
+
     } catch (error) {
       throw error.message || error;
     }

@@ -1,4 +1,5 @@
 const dbService = require('../services/db.service');
+const camelCaseUtil = require('../utils/camelCase.util');
 const { storageAccount, containerName } = require('../config/vars').azure;
 
 class PostService {
@@ -22,13 +23,13 @@ class PostService {
         const iCity = idxCity[iBeach.id_city];
         const iState = idxState[iCity.id_state];
 
-        return {
+        return camelCaseUtil({
           ...e,
           city_name: iCity.city_name,
           state_name: iState.state_name,
-          url: `https://${storageAccount}.blob.core.windows.net/$${containerName}`,
+          url: `https://${storageAccount}.blob.core.windows.net/${containerName}/${e.file_name}`,
           file_name: undefined
-        }
+        });
       });
 
       return data;
