@@ -15,10 +15,17 @@ module.exports = {
     timeout: parseInt(process.env.SERVER_TIMEOUT),
   },
   db: {
-    host: process.env.DBHOST,
+    host: process.env.DBSERVER,
+    database: process.env.DBNAME,
     user: process.env.DBUSER,
     password: process.env.DBPASS,
-    database: process.env.DBNAME,
+    dialect: process.env.DBDIALECT,
+    pool: {
+      max: process.env.DBPOOLMAX,
+      min: process.env.DBPOOLMIN,
+      acquire: process.env.DBPOOLACQUIRE,
+      idle: process.env.DBPOOLIDLE
+    }
   },
   azure: {
     storageCStr: process.env.AZURE_STORAGE_CONNECTION_STRING,

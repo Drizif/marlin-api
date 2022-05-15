@@ -5,7 +5,6 @@ class PostMiddleware {
     try {
       req.post = await PostValidator.createPost().validateAsync({ 
         ...req.body,
-        ...req.files
       });
 
       next();
