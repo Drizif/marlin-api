@@ -10,16 +10,7 @@ class PostValidator {
       city: Joi.string().required(),
       beachName: Joi.string().optional(),
       contaminationLevel: Joi.number().required(),
-      imgFile: Joi.object().keys({
-        name: Joi.string().required(),
-        data: Joi.binary().required(),
-        size: Joi.number().required(),
-        encoding: Joi.string().required(),
-        tempFilePath: Joi.string().optional().allow(''),
-        truncated: Joi.boolean().required(),
-        mimetype: Joi.string().required().valid('image/jpeg', 'image/png'),
-        md5: Joi.string().required(),
-      })
+      fileName: Joi.string().required(),
   }).options({ allowUnknown: true, stripUnknown: true });
 }
 

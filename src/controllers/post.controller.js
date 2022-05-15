@@ -1,17 +1,12 @@
-const { storageAccount } = require('../config/vars').azure;
-const azureStorageService = require('../services/azureStorage.service');
-
 class PostController {
   createPost = async (req, res) => {
     try {
-      const { name, title, description, state, city, contaminationLevel, beachName, imgFile } = req.post;
-
-      await azureStorageService.uploadFile(imgFile.data, imgFile.mimetype);
+      const { name, title, description, state, city, contaminationLevel, beachName, fileName } = req.post;
 
       res.status(200).json({
         status: true,
         message: '',
-        data: {}
+        data: req.post
       });
     } catch (error) {
       res.status(500).json({
@@ -29,9 +24,7 @@ class PostController {
       res.status(200).json({
         status: true,
         message: '',
-        data: {
-          url: `https://${storageAccount}.blob.core.windows.net/images/${id || null}`
-        }
+        data: []
       });
     } catch (error) {
       res.status(500).json({

@@ -2,8 +2,6 @@ const { v4 } = require('uuid');
 const getStream = require('into-stream');
 const { BlockBlobClient } = require('@azure/storage-blob');
 
-
-
 const { storageCStr, containerName } = require('../config/vars').azure;
 
 class AzureStorageService {
@@ -15,6 +13,8 @@ class AzureStorageService {
       const streamLength = buffer.length;
 
       await blobService.uploadStream(stream, streamLength);
+      
+      return blobName;
     } catch (error) {
       throw new Error(error);
     }
