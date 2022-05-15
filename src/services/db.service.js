@@ -18,7 +18,7 @@ class DBService {
         ...options
       });
 
-      return result[0].data;
+      return result;
     } catch (error) {
       throw error;
     }
