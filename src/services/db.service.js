@@ -13,7 +13,7 @@ class DBService {
     try {
       if (replacements) this.formatReplacements(replacements);
 
-      const result = await db.query(queryString + ' as data', {
+      const result = await db.query(queryString, {
         replacements,
         ...options
       });
