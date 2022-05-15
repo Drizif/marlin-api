@@ -6,7 +6,8 @@ const routes = express();
 routes.use(
   verifyApiKey,
   require('../router/img.routes'),
-  require('../router/post.routes')
+  require('../router/post.routes'),
+  require('../router/beachStatistics.routes'),
 );
 
 module.exports = routes;
