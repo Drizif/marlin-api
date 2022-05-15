@@ -1,12 +1,14 @@
+const postService = require('../services/post.service');
+
 class PostController {
   createPost = async (req, res) => {
     try {
-      const { name, title, description, state, city, contaminationLevel, beachName, fileName } = req.post;
+      const data = await postService.createPost(req.post);
 
       res.status(200).json({
         status: true,
         message: '',
-        data: req.post
+        data
       });
     } catch (error) {
       res.status(500).json({
@@ -21,10 +23,12 @@ class PostController {
     try {
       const { id } = req.post;
 
+      const data = await postService.getPost(id);
+
       res.status(200).json({
         status: true,
         message: '',
-        data: []
+        data
       });
     } catch (error) {
       res.status(500).json({

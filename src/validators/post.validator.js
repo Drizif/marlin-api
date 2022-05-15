@@ -4,12 +4,9 @@ class PostValidator {
   createPost = () => {
     return Joi.object().keys({
       name: Joi.string().optional().default('Anonymous'),
-      title: Joi.string().optional(),
+      title: Joi.string().required(),
       description: Joi.string().required().max(250),
-      state: Joi.string().required(),
-      city: Joi.string().required(),
-      beachName: Joi.string().optional(),
-      contaminationLevel: Joi.number().required(),
+      beachName: Joi.string().required(),
       fileName: Joi.string().required(),
   }).options({ allowUnknown: true, stripUnknown: true });
 }
