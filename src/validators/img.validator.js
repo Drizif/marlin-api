@@ -18,7 +18,7 @@ class ImgValidator {
 
   getImg = () => {
     return Joi.object().keys({
-      id: Joi.string().required(),
+      fileName: Joi.string().required(),
     }).options({ allowUnknown: true, stripUnknown: true });
   }
 }

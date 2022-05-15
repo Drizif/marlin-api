@@ -24,12 +24,12 @@ class ImgController {
 
   getImg = async (req, res) => {
     try {
-      const { id } = req.img;
+      const { fileName } = req.img;
 
       res.status(200).json({
         status: true,
         message: '',
-        data: `https://${storageAccount}.blob.core.windows.net/images/${id}`
+        data: `https://${storageAccount}.blob.core.windows.net/images/${fileName}`
       });
     } catch (error) {
       res.status(500).json({
