@@ -1,6 +1,6 @@
 const dbService = require('../services/db.service');
 
-class BeachStatisticsService {
+class BeachService {
   getBeachStatistics = async () => {
     try {
       const state = await dbService.rawQuery('SELECT * FROM state');
@@ -37,6 +37,15 @@ class BeachStatisticsService {
       throw error.message || error;
     }
   }
+
+  getBeach = async (id) => {
+    try {
+      return id ? await dbService.rawQuery(`SELECT * FROM beach WHERE id_beach = ${id}`) : await dbService.rawQuery('SELECT * FROM beach');
+    } catch (error) {
+      throw error.message || error;
+    }
+  }
+
 }
 
-module.exports = new BeachStatisticsService();
+module.exports = new BeachService();
