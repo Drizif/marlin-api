@@ -14,11 +14,19 @@ const sequelize = new Sequelize(database, user, password, {
   }
 });
 
-sequelize.authenticate().then(() => {
-  console.log('DB Connected');
-}).catch(err => {
-  console.log('DB Connection Error', err);
-});
+const testConnection = async () => {
+  const result = await sequelize.query('select getdate() as data', { type: Sequelize.QueryTypes.SELECT });
+  return result[0].data;
+}
+
+(async () => {
+  try {
+    sequelize.authenticate();
+    console.log((`DB Connected | ${await testConnection()}`))
+  } catch (error) {
+    console.log(error);
+  }
+})();
 
 module.exports = {
   db: sequelize,
